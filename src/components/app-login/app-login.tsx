@@ -1,4 +1,6 @@
-import { Component, h, Method, Prop, State } from '@stencil/core';
+import { Component, h,Prop } from '@stencil/core';
+import { MatchResults } from '@stencil/router';
+
 
 @Component({
   tag: 'app-login',
@@ -10,33 +12,33 @@ import { Component, h, Method, Prop, State } from '@stencil/core';
 
 export class AppLogin {
 
+  @Prop() match: MatchResults;
   @Prop() loading: boolean = false;
 
-  @State() data: any = {};
+   data: any = {};
 
 
-  handleChange(event) {
+  handleChange(event: any) :any {
     const { name, value } = event.target;
     this.data[name] = value;
   }
-  handleSubmit() {
+  async handleSubmit() {
     this.loading = true;
-    return new Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
       setTimeout(resolve, 2000);
 
-    }).then(function () {
-      alert(` "Welcome ${this.data.user.substring(0,this.data.user.length-10)}" username is from the email ${this.data.user}`);
-      this.loading=false;
-    })
+    });
+    alert(` "Welcome ${this.data.user.substring(0, this.data.user.length - 10)}" username is from the email ${this.data.user}`);
+    this.loading = false;
   };
 
 
 
   render() {
-
+    if (this.match && this.match.params.name){
     return (
       <div>
-        {this.loading ? <h2>loading</h2> :
+        {this.loading ? <h2 class='loading'>loading</h2> :
           <form class="login-form">
             <div class="login-container">
               <div class="field-wrap">
@@ -54,6 +56,7 @@ export class AppLogin {
         }
       </div>
     );
+      }
   }
 
 }
