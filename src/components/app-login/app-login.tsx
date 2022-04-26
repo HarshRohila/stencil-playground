@@ -20,8 +20,10 @@ export class AppLogin {
 
   handleChange(event: any) :any {
     const { name, value } = event.target;
-    this.data[name] = value;
+    this.data={...this.data,[name]:value}
   }
+  
+  
   async handleSubmit() {
     this.loading = true;
     await new Promise((resolve, reject) => {
@@ -30,11 +32,14 @@ export class AppLogin {
     });
     alert(` "Welcome ${this.data.user.substring(0, this.data.user.length - 10)}" username is from the email ${this.data.user}`);
     this.loading = false;
+    this.data.user="";
+    this.data.password="";
   };
 
 
 
   render() {
+    console.log(this.data);
     if (this.match && this.match.params.name){
     return (
       <div>
