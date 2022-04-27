@@ -3,7 +3,7 @@ import { MatchResults } from '@stencil/router';
 
 @Component({
   tag: 'app-login',
-  styleUrl: 'app-login.css',
+  styleUrl: 'app-login.scss',
   shadow: true,
 })
 export class AppLogin {
@@ -22,7 +22,7 @@ export class AppLogin {
     console.log('called', this.data);
 
     this.loading = true;
-    await new Promise((resolve, reject) => {
+    await new Promise((resolve) => {
       setTimeout(resolve, 2000);
     });
     alert(` "Welcome ${this.data.user.substring(0, this.data.user.length - 10)}" username is from the email ${this.data.user}`);
