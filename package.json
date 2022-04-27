@@ -6,8 +6,8 @@
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test": "stencil test --spec",
+    "test.watch": "stencil test --spec --watchAll --maxWorkers=1",
     "generate": "stencil generate"
   },
   "devDependencies": {
