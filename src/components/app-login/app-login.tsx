@@ -41,27 +41,28 @@ export class AppLogin {
   async handleSubmit(event: any) {
     event.preventDefault();
 
-    await this.onSubmit();
+    await this.onSubmit(this.data);
   }
 
-  private async onSubmit() {
-    console.log('called', this.data);
+  private async onSubmit(data: any) {
+    console.log('called', data);
     let pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
-    if (!pattern.test(this.data.user)) {
+    if (!pattern.test(data.user)) {
       this.warningMessage = true;
-      // console.log(this.data.user);
+      console.log(data.user);
       return;
     }
+    console.log(this.loading);
 
     this.loading = true;
     await new Promise(resolve => {
       setTimeout(resolve, 2000);
     });
-    alert(` "Welcome ${this.data.user.substring(0, this.data.user.length - 10)}" username is from the email ${this.data.user}`);
+    alert(` "Welcome ${data.user.substring(0, data.user.length - 10)}" username is from the email ${data.user}`);
     this.loading = false;
-    this.data.user = '';
-    this.data.password = '';
+    data.user = '';
+    data.password = '';
   }
 
   render() {

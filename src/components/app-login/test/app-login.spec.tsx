@@ -1,6 +1,11 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { AppLogin } from '../app-login';
 
+const data = {
+  user: 'saif123gmailcom',
+  password: '13asb',
+};
+
 describe('app-login', () => {
   it('renders form with all fields and submit button', async () => {
     // act
@@ -20,19 +25,19 @@ describe('app-login', () => {
 
   describe('submit button click', () => {
     it('shows loading', async () => {
-      const page1 = await newSpecPage({
+      const page = await newSpecPage({
         components: [AppLogin],
         html: `<app-login></app-login>`,
       });
-      page1.rootInstance.data = {
+      const data = {
         user: 'saif123@gmail.com',
         password: '13asb',
       };
-      global.alert = jest.fn();
-      page1.rootInstance.onSubmit();
 
-      await page1.waitForChanges();
-      const myLoading = page1.root.shadowRoot.querySelector('.loading');
+      page.rootInstance.onSubmit(data);
+
+      await page.waitForChanges();
+      const myLoading = page.root.shadowRoot.querySelector('.loading');
       expect(myLoading).toBeTruthy();
     });
 
@@ -51,5 +56,35 @@ describe('app-login', () => {
     //   expect(alertMock).toHaveBeenCalledTimes(1);
     //   // expect(global.alert).toBeCalledWith()
     //});
+
+    it('shows warning message if email is invalid', async () => {
+      const page2 = await newSpecPage({
+        components: [AppLogin],
+        html: `<app-login></app-login>`,
+      });
+      const data = {
+        user: 'saif123gmailcom',
+        password: '13asb',
+      };
+      page2.rootInstance.onSubmit(data);
+
+      await page2.waitForChanges();
+      const myWarningMessage = page2.root.shadowRoot.querySelector('.alert');
+      expect(myWarningMessage).toBeTruthy();
+    });
+  });
+  describe('eye  click', () => {
+    it('shows password', async () => {
+      const page3 = await newSpecPage({
+        components: [AppLogin],
+        html: `<app-login></app-login>`,
+      });
+
+      page3.rootInstance.handlePassword();
+
+      await page3.waitForChanges();
+      const myPassword = page3.root.shadowRoot.querySelector('input[name="password"]');
+      expect(myPassword).toHaveProperty('type', 'text');
+    });
   });
 });

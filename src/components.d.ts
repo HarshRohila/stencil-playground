@@ -10,7 +10,6 @@ export namespace Components {
     interface AppHome {
     }
     interface AppLogin {
-        "loading": boolean;
         "match": MatchResults;
     }
     interface AppProfile {
@@ -55,7 +54,6 @@ declare namespace LocalJSX {
     interface AppHome {
     }
     interface AppLogin {
-        "loading"?: boolean;
         "match"?: MatchResults;
     }
     interface AppProfile {
