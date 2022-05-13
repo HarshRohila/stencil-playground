@@ -19,8 +19,5 @@
     "jest-cli": "^27.4.5",
     "puppeteer": "^10.0.0"
   },
-  "license": "MIT",
-  "dependencies": {
-    "stenciljs-bootstrap": "^0.0.28-dev"
-  }
+  "license": "MIT"
 }

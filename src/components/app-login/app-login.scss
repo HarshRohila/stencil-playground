@@ -5,6 +5,45 @@
   margin: auto;
   margin-top: 20%;
 
+  // .field-wrap {
+  //   input {
+  //     width: 100%;
+  //     padding: 5px 12px;
+  //     font-size: 14px;
+  //     line-height: 20px;
+  //     vertical-align: middle;
+  //     background-repeat: no-repeat;
+  //     background-position: right 8px center;
+  //     border: 1px solid #d0d7de;
+  //     border-radius: 6px;
+  //     transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+  //     transition-property: color, background-color, box-shadow, border-color;
+
+  //     border-radius: 5px;
+  //   }
+  // }
+  // .field-wrap-notValid {
+  //   input {
+  //     width: 100%;
+  //     padding: 5px 12px;
+  //     font-size: 14px;
+  //     line-height: 20px;
+  //     vertical-align: middle;
+  //     background-repeat: no-repeat;
+  //     background-position: right 8px center;
+  //     border: 1px solid #ffcd38;
+  //     border-radius: 6px;
+  //     transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+  //     transition-property: color, background-color, box-shadow, border-color;
+
+  //     border-radius: 5px;
+  //     &:focus {
+  //       border: 1px solid #ffcd38;
+  //       outline: #ffcd38;
+  //     }
+  //   }
+  // }
+
   .field-wrap {
     input {
       width: 100%;
@@ -14,32 +53,19 @@
       vertical-align: middle;
       background-repeat: no-repeat;
       background-position: right 8px center;
-      border: 1px solid #d0d7de;
+      border: 1px solid grey;
       border-radius: 6px;
       transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
       transition-property: color, background-color, box-shadow, border-color;
 
       border-radius: 5px;
     }
-  }
-  .field-wrap-notValid {
-    input {
-      width: 100%;
-      padding: 5px 12px;
-      font-size: 14px;
-      line-height: 20px;
-      vertical-align: middle;
-      background-repeat: no-repeat;
-      background-position: right 8px center;
-      border: 1px solid #ffcd38;
-      border-radius: 6px;
-      transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
-      transition-property: color, background-color, box-shadow, border-color;
-
-      border-radius: 5px;
-      &:focus {
-        border: 1px solid #ffcd38;
-        outline: #ffcd38;
+    &.notValid {
+      input {
+        &:focus {
+          border: 1px solid #ffcd38;
+          outline: #ffcd38;
+        }
       }
     }
   }

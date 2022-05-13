@@ -1,5 +1,4 @@
-import { Component, h, Prop, State } from '@stencil/core';
-import { MatchResults } from '@stencil/router';
+import { Component, h, State } from '@stencil/core';
 
 @Component({
   tag: 'app-login',
@@ -8,20 +7,17 @@ import { MatchResults } from '@stencil/router';
   shadow: true,
 })
 export class AppLogin {
-  @Prop() match: MatchResults;
-
-  @State() warningMessage = false;
+  @State() showWarningMessage = false;
 
   @State() notValid = false;
 
-  @State() loading = false;
+  @State() showLoading = false;
 
   @State() showPassword = false;
 
   data: any = {};
 
   handlePassword = () => {
-    console.log('handlePassword called');
     this.showPassword = !this.showPassword;
   };
 
@@ -34,8 +30,8 @@ export class AppLogin {
     } else {
       this.notValid = true;
     }
-    console.log(this.notValid);
-    this.warningMessage = false;
+
+    this.showWarningMessage = false;
   }
 
   async handleSubmit(event: any) {
@@ -45,22 +41,19 @@ export class AppLogin {
   }
 
   private async onSubmit(data: any) {
-    console.log('called', data);
     let pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
     if (!pattern.test(data.user)) {
-      this.warningMessage = true;
-      console.log(data.user);
+      this.showWarningMessage = true;
       return;
     }
-    console.log(this.loading);
 
-    this.loading = true;
+    this.showLoading = true;
     await new Promise(resolve => {
       setTimeout(resolve, 2000);
     });
     alert(` "Welcome ${data.user.substring(0, data.user.length - 10)}" username is from the email ${data.user}`);
-    this.loading = false;
+    this.showLoading = false;
     data.user = '';
     data.password = '';
   }
@@ -68,17 +61,17 @@ export class AppLogin {
   render() {
     return (
       <div>
-        {this.loading ? (
+        {this.showLoading ? (
           <h2 class="loading">loading</h2>
         ) : (
           <form class="login-form" onSubmit={e => this.handleSubmit(e)} novalidate>
             <div class="login-container">
-              <div class={`field-wrap${this.notValid ? '-notValid' : ''}`}>
+              <div class={`field-wrap ${this.notValid ? 'notValid' : ''}`}>
                 <label>Email</label>
                 <br />
 
                 <input type="email" name="user" value={this.data.user} onInput={e => this.handleChange(e)} required placeholder="Enter Your Email" />
-                {this.warningMessage ? (
+                {this.showWarningMessage ? (
                   <div class="alert">
                     <i class="fas fa-exclamation-triangle"></i>
                     <span class="alert-content">Please enter valid email address</span>
