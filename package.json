@@ -11,13 +11,20 @@
     "generate": "stencil generate"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.3.1",
     "@stencil/core": "^2.13.0",
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
+    "@types/jsonapi-serializer": "^3.6.5",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
+    "miragejs": "^0.1.44",
     "puppeteer": "^10.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "jsonapi-serializer": "^3.6.7"
+  }
 }

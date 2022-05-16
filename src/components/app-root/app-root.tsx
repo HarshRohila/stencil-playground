@@ -1,11 +1,19 @@
 import { Component, h } from '@stencil/core';
+import { makeServer } from '../../mirage';
+import { BlogPostService } from '../../services/blogPost';
 
+makeServer({ environment: "development" })
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.scss',
   shadow: true,
 })
 export class AppRoot {
+
+  componentWillLoad() {
+    BlogPostService.getBlogPosts().then(t => console.log(t))
+  }
+
   render() {
     return (
       <div>

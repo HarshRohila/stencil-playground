@@ -10,7 +10,6 @@ export namespace Components {
     interface AppHome {
     }
     interface AppLogin {
-        "match": MatchResults;
     }
     interface AppProfile {
         "match": MatchResults;
@@ -54,7 +53,6 @@ declare namespace LocalJSX {
     interface AppHome {
     }
     interface AppLogin {
-        "match"?: MatchResults;
     }
     interface AppProfile {
         "match"?: MatchResults;

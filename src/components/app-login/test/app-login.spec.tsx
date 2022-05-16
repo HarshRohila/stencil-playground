@@ -1,11 +1,6 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { AppLogin } from '../app-login';
 
-const data = {
-  user: 'saif123gmailcom',
-  password: '13asb',
-};
-
 describe('app-login', () => {
   it('renders form with all fields and submit button', async () => {
     // act
