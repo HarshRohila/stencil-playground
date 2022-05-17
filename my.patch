@@ -1,0 +1,40 @@
+diff --git a/src/components/app-login/app-login.tsx b/src/components/app-login/app-login.tsx
+index 9745191..67290de 100644
+--- a/src/components/app-login/app-login.tsx
++++ b/src/components/app-login/app-login.tsx
+@@ -9,28 +9,25 @@ import { Component, h, State } from '@stencil/core';
+ export class AppLogin {
+   @State() showWarningMessage = false;
+ 
+-  @State() notValid = false;
+-
+   @State() showLoading = false;
+ 
+   @State() showPassword = false;
+ 
+-  data: any = {};
++  @State() data: any = {};
+ 
+   handlePassword = () => {
+     this.showPassword = !this.showPassword;
+   };
+ 
++  get notValid() {
++    const {user} = this.data
++    let pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
++    return !(pattern.test(user) || user === '')
++  }
++
+   handleChange(event: any): any {
+     const { name, value } = event.target;
+     this.data = { ...this.data, [name]: value };
+-    let pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+-    if (pattern.test(event.target.value) || event.target.value === '') {
+-      this.notValid = false;
+-    } else {
+-      this.notValid = true;
+-    }
+-
+     this.showWarningMessage = false;
+   }
+ 
