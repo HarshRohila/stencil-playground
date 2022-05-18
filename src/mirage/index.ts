@@ -27,8 +27,10 @@ export function makeServer({ environment = 'test' }) {
       this.namespace = 'api';
 
       this.get('/blog-posts');
-      this.del('/blog-posts/:id');
-      this.patch('/blog-posts/:id');
+      this.get('/blog-posts/:id');
+
+    this.del('/blog-posts/:id');
+      //   this.patch('/blog-posts/:id');
     },
   });
 }

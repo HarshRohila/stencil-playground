@@ -1,7 +1,6 @@
-import { Component, h, State } from '@stencil/core';
-import axios from 'axios';
-
-//import { BlogPostService, BlogPost } from '../../services/blogPost';
+import { Component, h, Prop, State } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
+import { BlogPostService, BlogPost } from '../../services/blogPost';
 
 @Component({
   tag: 'app-post',
@@ -9,19 +8,46 @@ import axios from 'axios';
   shadow: true,
 })
 export class AppPost {
+  @State() blogPostArr: BlogPost[];
+  @State() loading = true;
+  @Prop() history: RouterHistory;
+
   componentWillLoad() {
-    this.getBlogPosts();
+    BlogPostService.getBlogPosts().then(values => {
+      this.blogPostArr = values;
+      this.loading = false;
+    });
   }
-
-  @State() blogPostArr: any[];
-  async getBlogPosts() {
-    const { data } = await axios.get('api/blog-posts');
-    this.blogPostArr = [...this.blogPostArr, data.blogPost];
-  }
-
   render() {
     console.log(this.blogPostArr);
-
-    return <div></div>;
+    return (
+      <div>
+        {this.loading ? (
+          <h1>Loading</h1>
+        ) : (
+          <table>
+            <tr>
+              <th>Title</th>
+            </tr>
+            {this.blogPostArr.map(({ id, title, content }) => (
+              <tr key={id}>
+                <td
+                  onClick={() => {
+                    this.history.push(`/posts/${id}`, {});
+                  }}
+                >
+                  {title}
+                </td>
+              </tr>
+              // <tr key={id}>
+              //   <stencil-route-link url={`/posts/${id}`}>
+              //     <td>{title}</td>
+              //   </stencil-route-link>
+              // </tr>
+            ))}
+          </table>
+        )}
+      </div>
+    );
   }
 }
