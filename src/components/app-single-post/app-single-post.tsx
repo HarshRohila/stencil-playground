@@ -1,5 +1,5 @@
 import { Component, h, Prop, State } from '@stencil/core';
-import { MatchResults } from '@stencil/router';
+import { MatchResults, RouterHistory } from '@stencil/router';
 import { BlogPost, BlogPostService } from '../../services/blogPost';
 
 @Component({
@@ -9,6 +9,7 @@ import { BlogPost, BlogPostService } from '../../services/blogPost';
 })
 export class AppSinglePost {
   @Prop() match: MatchResults;
+  @Prop() history: RouterHistory;
 
   @State() singleBlogPost: BlogPost;
   @State() loading = true;
@@ -18,6 +19,12 @@ export class AppSinglePost {
       this.loading = !this.loading;
     });
   }
+  handleClick = () => {
+    let arr: BlogPost[] = history.state.state.state;
+    BlogPostService.deleteBlogPost(arr, this.singleBlogPost.id);
+    //this.history.pop('/posts', {});
+    this.history.goBack();
+  };
   render() {
     // console.log(this.singleBlogPost);
 
@@ -38,7 +45,7 @@ export class AppSinglePost {
               <td>{this.singleBlogPost.content}</td>
               <td>
                 <button>update</button>
-                <button>Del</button>
+                <button onClick={this.handleClick}>Del</button>
               </td>
             </tr>
           </table>

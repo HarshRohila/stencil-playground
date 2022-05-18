@@ -33,7 +33,7 @@ export class AppPost {
               <tr key={id}>
                 <td
                   onClick={() => {
-                    this.history.push(`/posts/${id}`, {});
+                    this.history.push(`/posts/${id}`, { state: this.blogPostArr });
                   }}
                 >
                   {title}

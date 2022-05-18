@@ -20,6 +20,7 @@ export namespace Components {
     interface AppRoot {
     }
     interface AppSinglePost {
+        "history": RouterHistory;
         "match": MatchResults;
     }
 }
@@ -83,6 +84,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface AppSinglePost {
+        "history"?: RouterHistory;
         "match"?: MatchResults;
     }
     interface IntrinsicElements {
