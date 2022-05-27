@@ -13,11 +13,17 @@ const BlogPostService = {
     return data.blogPost as BlogPost;
   },
 
-  async deleteBlogPost(blogPostArr: BlogPost[], id: number) {
+  async deleteBlogPost(id: number) {
     await axios.delete(`http://localhost:3333/api/blog-posts/${id}`);
-    let temp: BlogPost[];
-    temp = blogPostArr.filter(blog => blog.id !== id);
-    blogPostArr = [...temp];
+  },
+  async updateBlogPost(blogPost: BlogPost) {
+    const blogPostData = {
+      type: 'blogPosts',
+      id: blogPost.id,
+      attributes: blogPost,
+    };
+    const { data } = await axios.patch(`http://localhost:3333/api/blog-posts/${blogPost.id}`, { data: blogPostData });
+    return data as BlogPost;
   },
 };
 

@@ -28,9 +28,15 @@ export function makeServer({ environment = 'test' }) {
 
       this.get('/blog-posts');
       this.get('/blog-posts/:id');
+      this.del('/blog-posts/:id');
+      this.patch('/blog-posts/:id');
+      // this.patch('/blog-posts/:id', (schema, request) => {
+      //   let newAttrs = JSON.parse(request.requestBody);
+      //   let id = request.params.id;
+      //   let blog = schema.blogPost.find(id);
 
-    this.del('/blog-posts/:id');
-      //   this.patch('/blog-posts/:id');
+      //   return blog.update(newAttrs);
+      // });
     },
   });
 }

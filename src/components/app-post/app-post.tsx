@@ -19,13 +19,12 @@ export class AppPost {
     });
   }
   render() {
-    console.log(this.blogPostArr);
     return (
       <div>
         {this.loading ? (
           <h1>Loading</h1>
         ) : (
-          <table>
+          <table class="titles">
             <tr>
               <th>Title</th>
             </tr>

@@ -1,18 +1,25 @@
+import { h } from '@stencil/core';
 import { newSpecPage } from '@stencil/core/testing';
+import { BlogPostService } from '../../../services/blogPost';
 import { AppSinglePost } from '../app-single-post';
 
 describe('app-single-post', () => {
-  it('renders', async () => {
+  it('should call delete method of blogPost service when delete button is clicked', async () => {
+    //arrange
     const page = await newSpecPage({
       components: [AppSinglePost],
-      html: `<app-single-post></app-single-post>`,
+      template: (
+        <app-single-post
+          //@ts-ignore
+          match={{ params: { id: '1' } }}
+        ></app-single-post>
+      ),
     });
-    expect(page.root).toEqualHtml(`
-      <app-single-post>
-        <mock:shadow-root>
-          <slot></slot>
-        </mock:shadow-root>
-      </app-single-post>
-    `);
+    BlogPostService.deleteBlogPost = jest.fn();
+    await page.waitForChanges();
+    //act
+    page.rootInstance.handleDelete();
+    //assert
+    expect(BlogPostService.deleteBlogPost).toHaveBeenCalledTimes(1);
   });
 });
