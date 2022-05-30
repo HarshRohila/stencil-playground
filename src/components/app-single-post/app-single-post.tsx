@@ -24,7 +24,7 @@ export class AppSinglePost {
     });
   }
   handleDelete = () => {
-    let arr: BlogPost[] = history.state.state.state;
+    //let arr: BlogPost[] = history.state.state.state;
     BlogPostService.deleteBlogPost(this.singleBlogPost.id);
     // let temp: BlogPost[];
     // temp = arr.filter(blog => blog.id !== this.singleBlogPost.id);
@@ -34,26 +34,22 @@ export class AppSinglePost {
   handleUpdate = () => {
     this.updating = true;
   };
-  handleChange = (id: number, event: any) => {
+  handleChange = (event: any) => {
     event.preventDefault();
-    let arr: BlogPost[] = history.state.state.state;
-    const blog = arr.find(b => b.id === id);
-    if (!blog) return;
+    this.handleSubmit();
+  };
+  handleSubmit() {
+    // let arr: BlogPost[] = history.state.state.state;
+    //  const blog = arr.find(b => b.id === id);
+    //   if (!blog) return;
 
     this.singleBlogPost.title = this.title;
     this.singleBlogPost.content = this.content;
-    BlogPostService.updateBlogPost(this.singleBlogPost).then(
-      /*value => {
-      const index = arr.findIndex(blog => blog.id === value.id);
-      arr[index] = value;
-      });
-      */
-      value => console.log(value),
-    );
+    BlogPostService.updateBlogPost(this.singleBlogPost);
 
     this.updating = false;
     this.history.goBack();
-  };
+  }
 
   render() {
     console.log(this.title, this.content);
