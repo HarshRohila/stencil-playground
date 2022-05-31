@@ -59,7 +59,7 @@ export class AppSinglePost {
         {this.loading ? (
           <h1>Loading</h1>
         ) : (
-          <form onSubmit={event => this.handleChange(this.singleBlogPost.id, event)}>
+          <form onSubmit={event => this.handleChange(event)}>
             <div class="main">
               <table>
                 <tr>
