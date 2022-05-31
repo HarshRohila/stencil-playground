@@ -1,6 +1,6 @@
 import { Component, h, State } from '@stencil/core';
 import { makeServer } from '../../mirage';
-//import { BlogPostService, BlogPost } from '../../services/blogPost';
+
 // @ts-ignore
 window.mirage = makeServer({ environment: 'development' });
 
@@ -10,11 +10,6 @@ window.mirage = makeServer({ environment: 'development' });
   shadow: true,
 })
 export class AppRoot {
-  // componentWillLoad() {
-  //   BlogPostService.getBlogPosts().then(values => {
-  //     console.log(values);
-  //   });
-  // }
   render() {
     return (
       <div>

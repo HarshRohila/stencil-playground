@@ -4,12 +4,10 @@ import { BlogPostService } from '../../../services/blogPost';
 import { AppSinglePost } from '../app-single-post';
 
 describe('app-single-post', () => {
-  beforeEach(() => {
+  let page;
+  beforeEach(async () => {
     BlogPostService.getBlogPost = jest.fn().mockResolvedValue({});
-  });
-  it('should call delete method of blogPost service when delete button is clicked', async () => {
-    //arrange
-    const page = await newSpecPage({
+    page = await newSpecPage({
       components: [AppSinglePost],
       template: () => (
         <app-single-post
@@ -20,6 +18,8 @@ describe('app-single-post', () => {
         ></app-single-post>
       ),
     });
+  });
+  it('should call delete method of blogPost service when delete button is clicked', async () => {
     BlogPostService.deleteBlogPost = jest.fn();
     await page.waitForChanges();
     //act
@@ -27,19 +27,7 @@ describe('app-single-post', () => {
     //assert
     expect(BlogPostService.deleteBlogPost).toHaveBeenCalledTimes(1);
   });
-  it('should call update method og blogPost service when makes changes button is clicked', async () => {
-    //arrange
-    const page = await newSpecPage({
-      components: [AppSinglePost],
-      template: () => (
-        <app-single-post
-          //@ts-ignore
-          match={{ params: { id: '1' } }}
-          //@ts-ignore
-          history={{ goBack() {} }}
-        ></app-single-post>
-      ),
-    });
+  it('should call update method of blogPost service when makes changes button is clicked', async () => {
     BlogPostService.updateBlogPost = jest.fn();
     await page.waitForChanges();
     //act

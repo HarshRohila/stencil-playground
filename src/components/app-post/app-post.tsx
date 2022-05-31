@@ -8,13 +8,13 @@ import { BlogPostService, BlogPost } from '../../services/blogPost';
   shadow: true,
 })
 export class AppPost {
-  @State() blogPostArr: BlogPost[];
+  @State() blogPosts: BlogPost[];
   @State() loading = true;
   @Prop() history: RouterHistory;
 
   componentWillLoad() {
     BlogPostService.getBlogPosts().then(values => {
-      this.blogPostArr = values;
+      this.blogPosts = values;
       this.loading = false;
     });
   }
@@ -28,21 +28,16 @@ export class AppPost {
             <tr>
               <th>Title</th>
             </tr>
-            {this.blogPostArr.map(({ id, title, content }) => (
+            {this.blogPosts.map(({ id, title, content }) => (
               <tr key={id}>
                 <td
                   onClick={() => {
-                    this.history.push(`/posts/${id}`, { state: this.blogPostArr });
+                    this.history.push(`/posts/${id}`, { state: this.blogPosts });
                   }}
                 >
                   {title}
                 </td>
               </tr>
-              // <tr key={id}>
-              //   <stencil-route-link url={`/posts/${id}`}>
-              //     <td>{title}</td>
-              //   </stencil-route-link>
-              // </tr>
             ))}
           </table>
         )}

@@ -11,7 +11,7 @@ export class AppSinglePost {
   @Prop() match: MatchResults;
   @Prop() history: RouterHistory;
 
-  @State() singleBlogPost: BlogPost;
+  @State() BlogPost: BlogPost;
   @State() loading = true;
   @State() title: string;
   @State() content: string;
@@ -19,16 +19,12 @@ export class AppSinglePost {
 
   componentWillLoad() {
     BlogPostService.getBlogPost(Number(this.match.params.id)).then(value => {
-      this.singleBlogPost = value;
+      this.BlogPost = value;
       this.loading = !this.loading;
     });
   }
   handleDelete = () => {
-    //let arr: BlogPost[] = history.state.state.state;
-    BlogPostService.deleteBlogPost(this.singleBlogPost.id);
-    // let temp: BlogPost[];
-    // temp = arr.filter(blog => blog.id !== this.singleBlogPost.id);
-    // arr = [...temp];
+    BlogPostService.deleteBlogPost(this.BlogPost.id);
     this.history.goBack();
   };
   handleUpdate = () => {
@@ -39,13 +35,9 @@ export class AppSinglePost {
     this.handleSubmit();
   };
   handleSubmit() {
-    // let arr: BlogPost[] = history.state.state.state;
-    //  const blog = arr.find(b => b.id === id);
-    //   if (!blog) return;
-
-    this.singleBlogPost.title = this.title;
-    this.singleBlogPost.content = this.content;
-    BlogPostService.updateBlogPost(this.singleBlogPost);
+    this.BlogPost.title = this.title;
+    this.BlogPost.content = this.content;
+    BlogPostService.updateBlogPost(this.BlogPost);
 
     this.updating = false;
     this.history.goBack();
@@ -75,7 +67,7 @@ export class AppSinglePost {
                         type="text"
                         id="title"
                         name="title"
-                        value={this.singleBlogPost.title}
+                        value={this.BlogPost.title}
                         readOnly={!this.updating}
                         onChange={e => {
                           //@ts-ignore
@@ -87,7 +79,7 @@ export class AppSinglePost {
                       <textarea
                         id="content"
                         name="content"
-                        value={this.singleBlogPost.content}
+                        value={this.BlogPost.content}
                         readOnly={!this.updating}
                         rows={4}
                         cols={50}
