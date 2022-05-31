@@ -5,16 +5,23 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil/router";
+import { MatchResults, RouterHistory } from "@stencil/router";
 export namespace Components {
     interface AppHome {
     }
     interface AppLogin {
     }
+    interface AppPost {
+        "history": RouterHistory;
+    }
     interface AppProfile {
         "match": MatchResults;
     }
     interface AppRoot {
+    }
+    interface AppSinglePost {
+        "history": RouterHistory;
+        "match": MatchResults;
     }
 }
 declare global {
@@ -30,6 +37,12 @@ declare global {
         prototype: HTMLAppLoginElement;
         new (): HTMLAppLoginElement;
     };
+    interface HTMLAppPostElement extends Components.AppPost, HTMLStencilElement {
+    }
+    var HTMLAppPostElement: {
+        prototype: HTMLAppPostElement;
+        new (): HTMLAppPostElement;
+    };
     interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
     }
     var HTMLAppProfileElement: {
@@ -42,11 +55,19 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLAppSinglePostElement extends Components.AppSinglePost, HTMLStencilElement {
+    }
+    var HTMLAppSinglePostElement: {
+        prototype: HTMLAppSinglePostElement;
+        new (): HTMLAppSinglePostElement;
+    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
         "app-login": HTMLAppLoginElement;
+        "app-post": HTMLAppPostElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "app-single-post": HTMLAppSinglePostElement;
     }
 }
 declare namespace LocalJSX {
@@ -54,16 +75,25 @@ declare namespace LocalJSX {
     }
     interface AppLogin {
     }
+    interface AppPost {
+        "history"?: RouterHistory;
+    }
     interface AppProfile {
         "match"?: MatchResults;
     }
     interface AppRoot {
     }
+    interface AppSinglePost {
+        "history"?: RouterHistory;
+        "match"?: MatchResults;
+    }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-login": AppLogin;
+        "app-post": AppPost;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "app-single-post": AppSinglePost;
     }
 }
 export { LocalJSX as JSX };
@@ -72,8 +102,10 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-login": LocalJSX.AppLogin & JSXBase.HTMLAttributes<HTMLAppLoginElement>;
+            "app-post": LocalJSX.AppPost & JSXBase.HTMLAttributes<HTMLAppPostElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "app-single-post": LocalJSX.AppSinglePost & JSXBase.HTMLAttributes<HTMLAppSinglePostElement>;
         }
     }
 }

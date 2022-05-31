@@ -29,11 +29,12 @@ describe('app-login', () => {
         password: '13asb',
       };
 
-      page.rootInstance.onSubmit(data);
+      const promise = page.rootInstance.onSubmit(data);
 
       await page.waitForChanges();
       const myLoading = page.root.shadowRoot.querySelector('.loading');
       expect(myLoading).toBeTruthy();
+      await promise;
     });
 
     // fit('shows alert with welcome message for username', async () => {
@@ -61,11 +62,12 @@ describe('app-login', () => {
         user: 'saif123gmailcom',
         password: '13asb',
       };
-      page2.rootInstance.onSubmit(data);
+      const promise = page2.rootInstance.onSubmit(data);
 
       await page2.waitForChanges();
       const myWarningMessage = page2.root.shadowRoot.querySelector('.alert');
       expect(myWarningMessage).toBeTruthy();
+      await promise;
     });
   });
   describe('eye  click', () => {

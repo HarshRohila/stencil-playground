@@ -17,10 +17,12 @@ export class AppHome {
         <stencil-route-link url="/profile/stencil">
           <button>Profile page</button>
         </stencil-route-link>
-        <stencil-route-link url="/login/stencil">
+        <stencil-route-link url="/login">
           <button>login page</button>
         </stencil-route-link>
-
+        <stencil-route-link url="/posts">
+          <button>Posts page</button>
+        </stencil-route-link>
       </div>
     );
   }

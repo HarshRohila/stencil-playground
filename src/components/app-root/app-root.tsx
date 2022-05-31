@@ -1,19 +1,15 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, State } from '@stencil/core';
 import { makeServer } from '../../mirage';
-import { BlogPostService } from '../../services/blogPost';
 
-makeServer({ environment: "development" })
+// @ts-ignore
+window.mirage = makeServer({ environment: 'development' });
+
 @Component({
   tag: 'app-root',
   styleUrl: 'app-root.scss',
   shadow: true,
 })
 export class AppRoot {
-
-  componentWillLoad() {
-    BlogPostService.getBlogPosts().then(t => console.log(t))
-  }
-
   render() {
     return (
       <div>
@@ -27,6 +23,8 @@ export class AppRoot {
               <stencil-route url="/" component="app-home" exact={true} />
               <stencil-route url="/profile/:name" component="app-profile" />
               <stencil-route url="/login" component="app-login" />
+              <stencil-route url="/posts" component="app-post" exact={true} />
+              <stencil-route url="/posts/:id" component="app-single-post" />
             </stencil-route-switch>
           </stencil-router>
         </main>

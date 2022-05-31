@@ -3,7 +3,6 @@ import { Component, h, State } from '@stencil/core';
 @Component({
   tag: 'app-login',
   styleUrls: ['app-login.scss'],
-  assetsDirs: ['../../assets'],
   shadow: true,
 })
 export class AppLogin {
